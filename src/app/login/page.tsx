@@ -1,9 +1,45 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
+import { ClipLoader } from "react-spinners";
+import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { Label } from "@/components/ui/label";
-const page = () => {
+import { toast } from "@/components/ui/use-toast";
+import { Error } from "@/types/ErrorTypes";
+const Page = () => {
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [loading, setLoading] = useState<boolean>(false);
+    const router = useRouter();
+    const handleLogin = async () => {
+        try {
+            setLoading(true);
+            const loginData = {
+                email: email,
+                password: password,
+            };
+            const response = await axios.post(`/api/login`, loginData);
+            toast({
+                title: "Something went wrong",
+                description: response?.data?.message || "Error logging in",
+            });
+            console.log(response);
+            router.push("/");
+            router.refresh();
+        } catch (error: unknown) {
+            const Error = error as Error;
+            toast({
+                title: "Something went wrong",
+                description: Error?.response?.data?.error || "Error logging in",
+            });
+            console.log(error);
+            setLoading(false);
+        } finally {
+            setLoading(false);
+        }
+    };
     return (
         <div className="mx-auto max-w-sm space-y-4 flex flex-col justify-center items-center min-h-screen">
             <div className="space-y-2 text-center w-full">
@@ -22,14 +58,16 @@ const page = () => {
             </div>
             <div className="space-y-2 w-full flex flex-col">
                 <Label htmlFor="username">Email</Label>
-                <input type="email" placeholder="Enter Your Email" required className=" p-4 bg-black/10 text-black focus:outline-none  border-2 rounded-lg " />
+                <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Enter Your Email" required className=" p-4 bg-black/10 text-black focus:outline-none  border-2 rounded-lg " />
             </div>
             <div className="space-y-2 flex flex-col w-full">
                 <Label htmlFor="password">Password</Label>
-                <input type="password" placeholder="Enter Your Password" required className=" p-4 bg-black/10 text-black focus:outline-none  border-2 rounded-lg " />
+                <input type="password" placeholder="Enter Your Password" onChange={(e) => setPassword(e.target.value)} required className=" p-4 bg-black/10 text-black focus:outline-none  border-2 rounded-lg " />
             </div>
 
-            <button className=" bg-[#519259] p-4 w-full rounded-full text-white font-bold">Login</button>
+            <button className=" bg-[#519259] flex justify-center items-center p-4 w-full rounded-full text-white font-bold" onClick={handleLogin}>
+                {loading ? <ClipLoader /> : "Login"}
+            </button>
             <Link href={"/register"} className=" bg-[#F0BB62] text-center p-4 w-full rounded-full font-bold text-black">
                 Register
             </Link>
@@ -42,4 +80,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;

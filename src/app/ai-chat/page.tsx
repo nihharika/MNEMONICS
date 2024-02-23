@@ -83,7 +83,7 @@ const Chat = () => {
                             {msg.text !== "" && (
                                 <div className={`break-words max-w-[90%] lg:max-w-[30%] ${msg.isBot ? "self-start" : "self-end"} px-3 py-3`}>
                                     <p className={`${msg.isBot ? "bg-[#f5f0e5] rounded-lg text-black" : "border-2 border-black/30 dark:border-white/30 w-auto font-bold rounded-lg break-words"} p-4 rounded-lg whitespace-pre-wrap`}>
-                                        <span className="dark:text-white">
+                                        <span className={`${!msg.isBot && "dark:text-white"}`}>
                                             {msg.text && <span dangerouslySetInnerHTML={{ __html: convertMarkdownToHTML(msg.text) }}></span>}
                                             {!msg.isBot && !msg.text && msg.text !== "" && <span>{msg.text}</span>}
                                         </span>
