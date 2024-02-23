@@ -1,0 +1,10 @@
+.husky
+.vscode
+node_modules
+public
+.env*
+.prettierignore
+.prettierrc.json
+dockerfile
+readme.md
+bun.lockb
