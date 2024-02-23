@@ -2,6 +2,7 @@ import bcryptjs from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 
 import { connect } from "@/database/db";
+import { errorMessage,HTTP_STATUS } from "@/enums/enums";
 import { sendEmail } from "@/helpers/Email";
 import User from "@/models/user.model";
 import { Error } from "@/types/ErrorTypes";
@@ -19,7 +20,7 @@ export async function POST(request: NextRequest) {
         const user = await User.findOne({ $or: [{ email }, { username }] });
 
         if (user) {
-            return NextResponse.json({ error: "User already exists", success: false }, { status: 400 });
+            return NextResponse.json({ error: errorMessage.USER_ALREADY_EXIST, success: false }, { status: HTTP_STATUS.BAD_REQUEST });
         }
 
         //hash password
@@ -42,12 +43,17 @@ export async function POST(request: NextRequest) {
             emailType: "VERIFY_USER",
             userId: savedUser._id,
         });
-        return NextResponse.json({
-            message: "Email sent. Please verify your registration.",
-            success: true,
-        });
+        return NextResponse.json(
+            {
+                message: "Email sent. Please verify your registration",
+                success: true,
+            },
+            {
+                status: HTTP_STATUS.OK,
+            },
+        );
     } catch (error: unknown) {
         const Error = error as Error;
-        return NextResponse.json({ error: Error.message }, { status: 500 });
+        return NextResponse.json({ error: Error.message }, { status: HTTP_STATUS.INTERNAL_SERVER_ERROR });
     }
 }

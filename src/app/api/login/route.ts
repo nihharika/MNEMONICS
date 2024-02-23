@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
 
 import { connect } from "@/database/db";
+import { errorMessage,HTTP_STATUS } from "@/enums/enums";
 import User from "@/models/user.model";
 import { Error } from "@/types/ErrorTypes";
 
@@ -15,18 +16,18 @@ export async function POST(request: NextRequest) {
         // check if user exists in db
         const user = await User.findOne({ email });
         if (!user) {
-            return NextResponse.json({ error: "User does not exist", success: false }, { status: 400 });
+            return NextResponse.json({ error: errorMessage.USER_NOT_EXIST, success: false }, { status: HTTP_STATUS.NOT_FOUND });
         }
 
         if (!user.isVerified) {
-            return NextResponse.json({ error: "Please verify email before login", success: false }, { status: 400 });
+            return NextResponse.json({ error: errorMessage.USER_NOT_VERIFIED, success: false }, { status: HTTP_STATUS.BAD_REQUEST });
         }
 
         // check if password is correct
 
         const validPassword = await bcryptjs.compare(password, user.password);
         if (!validPassword) {
-            return NextResponse.json({ error: "Invalid password", success: false }, { status: 400 });
+            return NextResponse.json({ error: errorMessage.INCORRECT_PASSWORD, success: false }, { status: HTTP_STATUS.NOT_AUTHORIZED });
         }
         // create token data
         const tokenData = {
@@ -47,6 +48,6 @@ export async function POST(request: NextRequest) {
         return response;
     } catch (error: unknown) {
         const Error = error as Error;
-        return NextResponse.json({ error: Error.message }, { status: 500 });
+        return NextResponse.json({ error: Error.message }, { status: HTTP_STATUS.INTERNAL_SERVER_ERROR });
     }
 }
