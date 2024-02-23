@@ -1,4 +1,4 @@
-import { Bug, CalendarCheck, List, Map, Siren } from "lucide-react";
+import { Bug, CalendarCheck, HeartHandshake, Map, Siren } from "lucide-react";
 import Link from "next/link";
 
 import MapComponent from "@/components/client/GoogleMaps";
@@ -6,9 +6,9 @@ import MapComponent from "@/components/client/GoogleMaps";
 export default function Home() {
     const homeItems = [
         {
-            name: "Checklist",
-            link: "/checklist",
-            icon: List,
+            name: "Help",
+            link: "/help",
+            icon: HeartHandshake,
         },
         {
             name: "Map",

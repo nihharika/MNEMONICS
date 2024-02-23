@@ -32,7 +32,7 @@ const Page = () => {
             };
             const response = await axios.post(`/api/login`, loginData);
             toast({
-                title: "Something went wrong",
+                title: "Login Successful",
                 description: response?.data?.message || "Error logging in",
             });
             console.log(response);

@@ -24,7 +24,7 @@ export default function RootLayout({
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
                 <Toaster />
                 <body suppressHydrationWarning className={`${inter.className} p-4 dark:bg-black bg-white dark:text-white text-black`}>
-                    <section suppressHydrationWarning>
+                    <section className=" max-w-[800px] m-auto" suppressHydrationWarning>
                         <Navbar />
                         {children}
                     </section>

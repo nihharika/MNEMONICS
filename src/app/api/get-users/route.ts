@@ -31,7 +31,7 @@ export async function GET(request: NextRequest) {
             );
         }
 
-        const user = await User.findOne({ _id: userId }).select("-password -watchHistory -bookmarks -isAdmin");
+        const user = await User.findOne({ _id: userId }).select("-password");
 
         if (!user) {
             return NextResponse.json(
