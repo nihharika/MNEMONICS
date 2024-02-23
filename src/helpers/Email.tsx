@@ -22,7 +22,11 @@ export const sendEmail = async ({ email, emailType, userId }: EmailProps) => {
         }
 
         const transport = nodemailer.createTransport({
-            service: process.env.NEXT_PUBLIC_EMAIL_SERVICE,
+            // for production uncomment service and comment host and port
+            // service: process.env.NEXT_PUBLIC_EMAIL_SERVICE,
+            // for test
+            host: "smtp.ethereal.email",
+            port: 587,
             auth: {
                 user: process.env.NEXT_PUBLIC_EMAIL,
                 pass: process.env.NEXT_PUBLIC_EMAIL_PASSWORD,
