@@ -35,6 +35,9 @@ const Navbar = () => {
     ];
     const pathname = usePathname();
     const { setTheme } = useTheme();
+    if (pathname === "/login" || pathname === "/register" || pathname === "/forgot-password" || pathname === "/reset-password" || pathname === "/verifyToken") {
+        return null;
+    }
     return (
         <nav className="">
             <section className="flex justify-between z-50">

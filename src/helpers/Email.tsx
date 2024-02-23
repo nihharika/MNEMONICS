@@ -28,14 +28,14 @@ export const sendEmail = async ({ email, emailType, userId }: EmailProps) => {
             host: "smtp.ethereal.email",
             port: 587,
             auth: {
-                user: process.env.NEXT_PUBLIC_EMAIL,
-                pass: process.env.NEXT_PUBLIC_EMAIL_PASSWORD,
+                user: "lucie.dietrich@ethereal.email",
+                pass: "x91Rkztupqt2m421G5",
             },
         });
 
         const Email = render(<RegisterEmail username={email} type={emailType} VerifyLink={`${process.env.NEXT_PUBLIC_DOMAIN}/${emailType == "VERIFY_USER" ? "verifyToken" : "verifyResetPassword"}?token=${cleanedHashedToken}`} />);
         const mailOptions = {
-            from: "animetrixservices@gmail.com",
+            from: "secureunix@gmail.com",
             to: email,
             subject: emailType === "VERIFY_USER" ? "Verify your email" : "Reset Your Password and Keep it a Secret! 🤐",
             html: Email,

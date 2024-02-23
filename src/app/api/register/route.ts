@@ -2,7 +2,7 @@ import bcryptjs from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 
 import { connect } from "@/database/db";
-import { errorMessage,HTTP_STATUS } from "@/enums/enums";
+import { errorMessage, HTTP_STATUS } from "@/enums/enums";
 import { sendEmail } from "@/helpers/Email";
 import User from "@/models/user.model";
 import { Error } from "@/types/ErrorTypes";
@@ -12,7 +12,7 @@ connect();
 export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json();
-        const { username, email, password, userType } = reqBody;
+        const { username, email, password } = reqBody;
 
         console.log(reqBody);
 
@@ -31,14 +31,13 @@ export async function POST(request: NextRequest) {
             username,
             email,
             password: hashedPassword,
-            userType: userType,
         });
 
         const savedUser = await newUser.save();
         console.log(savedUser);
 
         // send verification email
-        await sendEmail({
+        const emailStatus = await sendEmail({
             email,
             emailType: "VERIFY_USER",
             userId: savedUser._id,
@@ -47,6 +46,7 @@ export async function POST(request: NextRequest) {
             {
                 message: "Email sent. Please verify your registration",
                 success: true,
+                emailStatus,
             },
             {
                 status: HTTP_STATUS.OK,

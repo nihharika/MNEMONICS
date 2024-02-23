@@ -43,7 +43,7 @@ const MapComponent = () => {
                 </div>
             ) : (
                 <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY!}>
-                    <GoogleMap center={center} zoom={20} mapContainerStyle={{ width: "100%", height: "500px", borderRadius: "1rem" }}>
+                    <GoogleMap center={center} zoom={19} mapContainerStyle={{ width: "100%", height: "500px", borderRadius: "1rem" }}>
                         <Marker position={center} />
                     </GoogleMap>
                 </LoadScript>
