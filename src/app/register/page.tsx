@@ -86,7 +86,7 @@ const Page = () => {
             </div>
 
             <button onClick={registerUser} className="bg-[#519259] flex gap-3 justify-center items-center p-4 w-full rounded-full text-white font-bold" disabled={loading ? true : false}>
-                {loading ? <ClipLoader size={20} /> : "Register"}
+                {loading ? <ClipLoader color="#fff" size={20} /> : "Register"}
             </button>
 
             <div className="flex items-center space-x-2">

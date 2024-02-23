@@ -21,10 +21,7 @@ export const sendEmail = async ({ email, emailType, userId }: EmailProps) => {
             await User.findByIdAndUpdate(userId, { forgotPasswordToken: cleanedHashedToken, forgotPasswordTokenExpiry: Date.now() + 3 * 60 * 60 * 1000 }); //token expiry in 3 hours
         }
 
-        const transport = nodemailer.createTransport({
-            // for production uncomment service and comment host and port
-            // service: process.env.NEXT_PUBLIC_EMAIL_SERVICE,
-            // for test
+        const transporter = nodemailer.createTransport({
             host: "smtp.ethereal.email",
             port: 587,
             auth: {
@@ -35,13 +32,13 @@ export const sendEmail = async ({ email, emailType, userId }: EmailProps) => {
 
         const Email = render(<RegisterEmail username={email} type={emailType} VerifyLink={`${process.env.NEXT_PUBLIC_DOMAIN}/${emailType == "VERIFY_USER" ? "verifyToken" : "verifyResetPassword"}?token=${cleanedHashedToken}`} />);
         const mailOptions = {
-            from: "secureunix@gmail.com",
+            from: "secureuni@gmail.com",
             to: email,
             subject: emailType === "VERIFY_USER" ? "Verify your email" : "Reset Your Password and Keep it a Secret! 🤐",
             html: Email,
         };
 
-        const mailresponse = await transport.sendMail(mailOptions);
+        const mailresponse = await transporter.sendMail(mailOptions);
         return mailresponse;
     } catch (error: unknown) {
         const ErrorMsg = error as Error;

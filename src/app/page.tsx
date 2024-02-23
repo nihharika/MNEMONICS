@@ -41,7 +41,7 @@ export default function Home() {
             <div>
                 <Link
                     href={"/emergency-call"}
-                    className=" bg-[#009963] absolute right-3 bottom-28 text-lg 
+                    className=" bg-red-600 absolute right-3 bottom-28 text-lg 
              p-3 tracking-wide flex items-center gap-2 text-center  rounded-full text-white font-bold"
                 >
                     <Siren />

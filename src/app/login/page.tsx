@@ -81,7 +81,7 @@ const Page = () => {
             </div>
 
             <button className=" bg-[#519259] flex justify-center items-center p-4 w-full rounded-full text-white font-bold" onClick={handleLogin}>
-                {loading ? <ClipLoader /> : "Login"}
+                {loading ? <ClipLoader color="#fff" /> : "Login"}
             </button>
             <Link href={"/register"} className=" bg-[#F0BB62] text-center p-4 w-full rounded-full font-bold text-black">
                 Register
