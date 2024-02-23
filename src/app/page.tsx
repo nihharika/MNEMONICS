@@ -1,5 +1,7 @@
-import { Bug, CalendarCheck, List, Map } from "lucide-react";
+import { Bug, CalendarCheck, List, Map, Siren } from "lucide-react";
 import Link from "next/link";
+
+import MapComponent from "@/components/client/GoogleMaps";
 
 export default function Home() {
     const homeItems = [
@@ -25,8 +27,9 @@ export default function Home() {
         },
     ];
     return (
-        <main className=" mt-7">
-            <div className="bg-green-500 p-4 rounded-lg h-56 w-full"></div>
+        <main className=" mt-7 ">
+            {/* <div className="bg-green-500 p-4 rounded-lg h-56 w-full"></div> */}
+            <MapComponent />
             <div className="flex gap-8 justify-between items-center mt-7 border-b-2 border-black/ mb-2">
                 {homeItems.map((item, index) => (
                     <Link href={item.link} key={index} className="flex-col justify-center items-center flex gap-3">
@@ -34,6 +37,16 @@ export default function Home() {
                         <span className="text-md tracking-wide border-b-2 border-black/20">{item.name}</span>
                     </Link>
                 ))}
+            </div>
+            <div>
+                <Link
+                    href={"/emergency-call"}
+                    className=" bg-[#009963] absolute right-3 bottom-28 text-lg 
+             p-3 tracking-wide flex items-center gap-2 text-center  rounded-full text-white font-bold"
+                >
+                    <Siren />
+                    <span>Emergency</span>
+                </Link>
             </div>
         </main>
     );

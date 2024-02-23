@@ -1,8 +1,9 @@
 "use client";
 import React from "react";
-import { BellRing, CircleUser, Home, Map, MessageCircleMore } from "lucide-react";
+import { BellRing, BrainCircuit, CircleUser, Home, Laptop, Map, MessageCircleMore, Moon, Sun } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTheme } from "next-themes";
 
 const Navbar = () => {
     const navItems = [
@@ -33,26 +34,26 @@ const Navbar = () => {
         },
     ];
     const pathname = usePathname();
+    const { setTheme } = useTheme();
     return (
-        <>
-            <nav className="flex justify-between">
+        <nav className="">
+            <section className="flex justify-between z-50">
+                <div className="flex items-center gap-5">
+                    <Moon onClick={() => setTheme("dark")} />
+                    <Sun onClick={() => setTheme("light")} />
+                    <Laptop onClick={() => setTheme("system")} />
+                </div>
                 <Link
-                    href={"/emergency-call"}
-                    className=" bg-[#009963] text-lg w-44
-             p-3 tracking-wide text-center h-full rounded-full text-white font-bold"
+                    href={"/ai-chat"}
+                    className=" bg-[#f5f0e5] dark:text-black w-32 text-center text-lg
+             p-3 rounded-full font-bold flex items-center justify-center gap-2"
                 >
-                    Emergency Call
+                    <BrainCircuit />
+                    AI Chat
                 </Link>
-                <Link
-                    href={"/live-chat"}
-                    className=" bg-[#f5f0e5] w-32 text-center text-lg
-             p-3 rounded-full font-bold"
-                >
-                    Live Chat
-                </Link>
-            </nav>
-            <div className="w-full h-auto fixed bottom-0 right-0 left-0">
-                <div className="flex gap-2 justify-between flex-wrap border-t-2 border-black/10">
+            </section>
+            <div className=" w-full bg-white dark:bg-black border-t-2 border-black/10 dark:border-white/10 fixed z-50 left-0 right-0 bottom-0">
+                <div className="flex gap-2 justify-between flex-wrap border-t-2 border-black/10 dark:border-white/10">
                     {navItems.map((item, index) => {
                         const isActive = (pathname.includes(item.link) && item.link.length > 1) || pathname === item.link;
                         return (
@@ -66,7 +67,7 @@ const Navbar = () => {
                     })}
                 </div>
             </div>
-        </>
+        </nav>
     );
 };
 
