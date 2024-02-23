@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { ClipLoader } from "react-spinners";
 import axios from "axios";
+import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -12,8 +13,17 @@ const Page = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
+    const [showPassword, setShowPassword] = useState<boolean>(false);
     const router = useRouter();
     const handleLogin = async () => {
+        if (!email || !password) {
+            // Display an error message or toast indicating that all fields are required
+            toast({
+                title: "All fields are required",
+                description: "Please fill in all the fields to register.",
+            });
+            return;
+        }
         try {
             setLoading(true);
             const loginData = {
@@ -62,7 +72,12 @@ const Page = () => {
             </div>
             <div className="space-y-2 flex flex-col w-full">
                 <Label htmlFor="password">Password</Label>
-                <input type="password" placeholder="Enter Your Password" onChange={(e) => setPassword(e.target.value)} required className=" p-4 bg-black/10 text-black focus:outline-none  border-2 rounded-lg " />
+                <div className="w-full flex gap-3 p-4 bg-black/10 text-black focus:outline-none  border-2 rounded-lg">
+                    <input type={`${showPassword ? "text" : "password"}`} placeholder="Enter Your Password" onChange={(e) => setPassword(e.target.value)} required className="w-[90%] bg-transparent focus:outline-none" />
+                    <button onClick={() => setShowPassword(!showPassword)} className="w-[10%] flex justify-center items-center">
+                        {showPassword ? <Eye /> : <EyeOff />}
+                    </button>
+                </div>
             </div>
 
             <button className=" bg-[#519259] flex justify-center items-center p-4 w-full rounded-full text-white font-bold" onClick={handleLogin}>
