@@ -56,8 +56,8 @@ const Page = () => {
                 <label htmlFor="Email">Email</label>
                 <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} className=" bg-transparent border-2 dark:border-white/20 border-black/20 p-4 focus:outline-none  rounded-lg dark:text-white text-black" autoComplete="off" />
                 {loading ? (
-                    <button className=" font-semibold flex gap-3 p-3  bg-white text-black rounded-lg items-center justify-center" disabled={true}>
-                        <ClockLoader size={30} />
+                    <button className=" font-semibold flex gap-3 p-3  bg-black text-white rounded-lg items-center justify-center" disabled={true}>
+                        <ClockLoader size={30} color="#ffff" />
                         <span>Sending...</span>
                     </button>
                 ) : (

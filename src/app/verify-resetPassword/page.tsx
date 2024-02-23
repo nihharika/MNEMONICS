@@ -100,7 +100,7 @@ const Page = () => {
                         {passwordMismatch && <span className="text-red-500 font-semibold">Password Didn&apos;t Match</span>}
                         {password && confirmPassword.length < 8 && <span className="text-red-500 font-semibold">Password should have alteast 8 characters</span>}
                         {loading ? (
-                            <button className=" font-semibold flex gap-3 p-3  bg-white text-black rounded-lg items-center justify-center" disabled={true}>
+                            <button className=" font-semibold flex gap-3 p-3  bg-black text-white rounded-lg items-center justify-center" disabled={true}>
                                 <ClockLoader size={30} />
                                 <span>Resetting...</span>
                             </button>
