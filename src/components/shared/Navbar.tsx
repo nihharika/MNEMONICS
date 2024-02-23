@@ -14,17 +14,17 @@ const Navbar = () => {
         },
         {
             name: "Chat",
-            link: "/chat",
+            link: "/anynomous-chat",
             icon: MessageCircleMore,
         },
         {
             name: "Map",
-            link: "/emergency-call",
+            link: "/map",
             icon: Map,
         },
         {
             name: "Alert",
-            link: "/live-chat",
+            link: "/alert",
             icon: BellRing,
         },
         {
