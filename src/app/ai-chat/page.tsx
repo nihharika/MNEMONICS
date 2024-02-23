@@ -74,7 +74,7 @@ const Chat = () => {
     };
 
     return (
-        <section className="min-h-[80vh] mb-24 z-10  w-full relative text-black overflow-y-scroll flex flex-col justify-between align-middle">
+        <section className="min-h-[75vh] mb-24 z-10  w-full relative text-black overflow-y-scroll flex flex-col justify-between align-middle">
             {/* chatbody */}
             <div className=" overflow-y-scroll  overflow-x-hidden h-[90%] w-full max-w-full">
                 <div className="flex flex-col mb-9 mt-9 relative">

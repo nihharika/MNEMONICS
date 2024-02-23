@@ -68,12 +68,12 @@ const Page = () => {
             </div>
             <div className="space-y-2 w-full flex flex-col">
                 <Label htmlFor="username">Email</Label>
-                <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Enter Your Email" required className=" p-4 bg-black/10 text-black focus:outline-none  border-2 rounded-lg " />
+                <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Enter Your Email" required className=" p-4 bg-black/10 dark:text-white text-black focus:outline-none  border-2 rounded-lg " />
             </div>
             <div className="space-y-2 flex flex-col w-full">
                 <Label htmlFor="password">Password</Label>
                 <div className="w-full flex gap-3 p-4 bg-black/10 text-black focus:outline-none  border-2 rounded-lg">
-                    <input type={`${showPassword ? "text" : "password"}`} placeholder="Enter Your Password" onChange={(e) => setPassword(e.target.value)} required className="w-[90%] bg-transparent focus:outline-none" />
+                    <input type={`${showPassword ? "text" : "password"}`} placeholder="Enter Your Password" onChange={(e) => setPassword(e.target.value)} required className="w-[90%] dark:text-white bg-transparent focus:outline-none" />
                     <button onClick={() => setShowPassword(!showPassword)} className="w-[10%] flex justify-center items-center">
                         {showPassword ? <Eye /> : <EyeOff />}
                     </button>
